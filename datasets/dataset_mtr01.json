@@ -1,0 +1,15 @@
+{
+    "sys_time": "2022-10-14 1:11:03",
+    "curr_time": "2022-10-14 01:11:03",
+    "data": {
+        "AEL-HOK": {
+            "curr_time": "2022-10-14 01:11:03",
+            "sys_time": "2022-10-14 1:11:03",
+            "UP": [],
+            "DOWN": []
+        }
+    },
+    "status": 1,
+    "message": "successful",
+    "isdelay": "N"
+}
