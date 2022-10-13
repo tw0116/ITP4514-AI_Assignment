@@ -10,7 +10,9 @@ payload = {"line": line, "sta": station}
 r = requests.get(
     "https://rt.data.gov.hk/v1/transport/mtr/getSchedule.php?", params=payload)
 
-mtr_obj = json.dumps(r.json())
+mtr_obj = json.dumps(r.json(), indent=4)
+
+print(mtr_obj)
 
 with open("mtr.json", "w") as file:
     file.write(mtr_obj)
