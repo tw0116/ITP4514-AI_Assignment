@@ -1,4 +1,3 @@
-from os import stat
 from urllib import response
 import requests
 import json
