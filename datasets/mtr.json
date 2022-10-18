@@ -1,1 +1,42 @@
-{"sys_time": "2022-10-14 0:20:29", "curr_time": "2022-10-14 00:20:29", "data": {"TCL-HOK": {"curr_time": "2022-10-14 00:20:29", "sys_time": "2022-10-14 0:20:29", "UP": [{"ttnt": "6", "valid": "Y", "plat": "3", "time": "2022-10-14 00:26:00", "source": "-", "dest": "TUC", "seq": "1"}, {"ttnt": "18", "valid": "Y", "plat": "3", "time": "2022-10-14 00:38:00", "source": "+", "dest": "TUC", "seq": "2"}, {"ttnt": "29", "valid": "Y", "plat": "3", "time": "2022-10-14 00:50:00", "source": "+", "dest": "TUC", "seq": "3"}]}}, "status": 1, "message": "successful", "isdelay": "N"}
+{
+    "sys_time": "2022-10-14 0:20:29",
+    "curr_time": "2022-10-14 00:20:29",
+    "data": {
+        "TCL-HOK": {
+            "curr_time": "2022-10-14 00:20:29",
+            "sys_time": "2022-10-14 0:20:29",
+            "UP": [
+                {
+                    "ttnt": "6",
+                    "valid": "Y",
+                    "plat": "3",
+                    "time": "2022-10-14 00:26:00",
+                    "source": "-",
+                    "dest": "TUC",
+                    "seq": "1"
+                },
+                {
+                    "ttnt": "18",
+                    "valid": "Y",
+                    "plat": "3",
+                    "time": "2022-10-14 00:38:00",
+                    "source": "+",
+                    "dest": "TUC",
+                    "seq": "2"
+                },
+                {
+                    "ttnt": "29",
+                    "valid": "Y",
+                    "plat": "3",
+                    "time": "2022-10-14 00:50:00",
+                    "source": "+",
+                    "dest": "TUC",
+                    "seq": "3"
+                }
+            ]
+        }
+    },
+    "status": 1,
+    "message": "successful",
+    "isdelay": "N"
+}
