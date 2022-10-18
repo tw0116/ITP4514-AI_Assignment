@@ -30,7 +30,7 @@ twl_weekday_evening_peak_hour = [["tsw, twh, 2.0, 0"],
                                  ["tst, adm, 2.0, 0"],
                                  ["adm, cen, 2.0, 0"]]
 
-twl_weekday_morning_peak_hour = [["wha, hom, 2.0, 0"],
+ktl_weekday_morning_peak_hour = [["wha, hom, 2.0, 0"],
                                  ["hom, ymt, 2.0, 0"],
                                  ["ymt, mok, 2.0, 0"],
                                  ["mok, pre, 2.0, 0"],
@@ -46,7 +46,7 @@ twl_weekday_morning_peak_hour = [["wha, hom, 2.0, 0"],
                                  ["lat, yat, 2.0, 0"],
                                  ["yat, tik, 2.0, 0"]]
 
-twl_weekday_evening_peak_hour = [["wha, hom, 2.0, 0"],
+ktl_weekday_evening_peak_hour = [["wha, hom, 2.0, 0"],
                                  ["hom, ymt, 2.0, 0"],
                                  ["ymt, mok, 2.0, 0"],
                                  ["mok, pre, 2.0, 0"],
