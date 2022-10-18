@@ -4,7 +4,6 @@ morningPeakHours = []
 eveningPeakHours = []
 nonPeakHours = []
 
-
 station_start = str(input("Enter Station: "))
 station_end = str(input("Enter Station: "))
 
