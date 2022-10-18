@@ -11,7 +11,8 @@ station_end = str(input("Enter Station: "))
 # Check whether the "station_start" and the "station_end" at the same line.
 
     # if "station_start" and "station_end" are at the same line
-        # alther heuristic function
+        # alther heuristic function of the lines
 
     # if "station_start" and "station_end" are not at the same line
-        # alther heuristic function
+        # alther heuristic function of the lines
+
