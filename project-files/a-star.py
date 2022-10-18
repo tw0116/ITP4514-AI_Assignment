@@ -29,8 +29,8 @@ heuristic = [
     [5, 4, 3, 2, 1, 0]
 ]
 
-init = [0, 0]
-goal = [len(grid)-1, len(grid[0])-1]
+init = [0, 0]                           # <-- Start point
+goal = [len(grid)-1, len(grid[0])-1]    # <-- End point 
 cost = 1
 
 delta = [
