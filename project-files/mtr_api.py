@@ -2,10 +2,6 @@ from urllib import response
 import requests
 import json
 
-
-
-
-
 print(len(tml_stat))
 
 #line = str(input("Enter Line: "))
