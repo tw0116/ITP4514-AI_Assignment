@@ -22,29 +22,30 @@ for i in graph:
 nodes = set(temp).union(set(temp1))
 
 
-def A_star(graph, costs, open, closed, cur_node):
+def A_star(graph, costs, unvisited, visited, cur_node):
 
-    if cur_node in open:
-        open.remove(cur_node)
-    closed.add(cur_node)
+    if cur_node in unvisited:
+        unvisited.remove(cur_node)
+    visited.add(cur_node)
 
-    # Find 
+    # Loop all the nodes connected to the corrent node
     for i in graph:
         if (i[0] == cur_node and costs[i[0]] + i[2] + i[3] < costs[i[1]]):
-            open.add(i[1])
+            unvisited.add(i[1])
             costs[i[1]] = costs[i[0]] + i[2] + i[3] # Update path's cost to the connected node
             path[i[1]] = path[i[0]] + ' -> ' + i[1] # Update path of the connected node
     costs[cur_node] = 999999 
-    print(costs)
+    print("set(): costs - ", costs) # [DEBUG]
 
     small = min(costs, key = costs.get) # Find the key in dict():costs with the minimum value
+    print("Node w/ the smallest path's cost: ", small, "\n") # [DEBUG]
 
-    if small not in closed:
-        A_star(graph, costs, open, closed, small)
+    if small not in visited:
+        A_star(graph, costs, unvisited, visited, small)
 
 # =======================================================================================================================
-#   dict(): costs   - Store all the node(s) that has not been searched
-#   dict(): path    - Store all the node(s) that has been searched
+#   dict(): costs   - Store the paths' cost of each node
+#   dict(): path    - Store the paths to each node
 # =======================================================================================================================
 costs = dict()
 path = dict()
@@ -54,12 +55,11 @@ for i in nodes:
     path[i] = ' '       # dict():path - Set the keys as the nodes and all values to ' '
 
 # =======================================================================================================================
-#   set(): open     - Store all the node(s) that has not been searched
-#   set(): closed   - Store all the node(s) that has been searched
+#   set(): open     - Store all the node(s) that has not been visited
+#   set(): closed   - Store all the node(s) that has been visited
 # =======================================================================================================================
 open = set()
 closed = set()
-
 
 
 start_node = input("Enter the Start Node: ")
