@@ -58,17 +58,16 @@ for i in nodes:
 #   set(): open     - Store all the node(s) that has not been visited
 #   set(): closed   - Store all the node(s) that has been visited
 # =======================================================================================================================
-open = set()
-closed = set()
-
+unvisited = set()
+visited = set()
 
 start_node = input("Enter the Start Node: ")
-open.add(start_node)
+unvisited.add(start_node)
 
 path[start_node] = start_node   # Set the value with the key "start_node" to "start_node" since the path begin with the "start_node", example: {A: A} 
 costs[start_node] = 0           # Set the value with the key "start_node" to 0, example: {A: 0}  
 
-A_star(graph, costs, open, closed, start_node)
+A_star(graph, costs, unvisited, visited, start_node)
 
 goal_node = input("Enter the Goal Node: ")
 
@@ -76,5 +75,5 @@ print("Path with least cost is: ", path[goal_node])
 
 print(path)
 print(costs)
-print(open)
-print(closed)
+print(unvisited)
+print(visited)

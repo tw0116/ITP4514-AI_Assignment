@@ -7,6 +7,8 @@
     # if "station_start" and "station_end" are not at the same line
         # alther heuristic function of the lines
 
+from dataclasses import replace
+from glob import glob
 import json
 
 graph = {
@@ -31,11 +33,11 @@ graph = {
     'S': [['R', 2.0]]
 }
 
-print(graph['A'][0][0])
+# print(graph['A'][0][0])
 
-for i in graph['B']:
-    for j in i[0]:
-        print(j)
+# for i in graph['B']:
+#     for j in i[0]:
+#         print(j)
 
 # start = str(input("Enter Start: "))
 # end = str(input("Enter End: "))
@@ -85,8 +87,9 @@ def all_paths(graph, start, end, path=[]):
     return paths
 
 
-def shortest_path(graph, start, end, path):
-
+def shortest_path(graph, cost, start, end, path):
+    
+    cost[start] = 0
     path = path + [start]
 
     # Check whether the "start" and "end" are the same
@@ -105,13 +108,19 @@ def shortest_path(graph, start, end, path):
     # Loop the graph w/ the same key of the "start"
     for i in graph[start]:
         for node in i[0]:
+
             if node not in path:
-                new_path = shortest_path(graph, node, end, path)
+                new_path = shortest_path(graph, cost, node, end, path)
 
                 if new_path:
                     if not shortest or len(new_path) < len(shortest):
                         shortest = new_path
     return shortest
 
-path = []
-print(shortest_path(graph, 'F', 'Q', path))
+cost = dict()
+for i in graph:
+    cost[i] = 999999
+
+path = list()
+
+print(all_paths(graph, 'F', 'Q', path))
