@@ -28,13 +28,14 @@ def A_star(graph, costs, unvisited, visited, cur_node):
         unvisited.remove(cur_node)
     visited.add(cur_node)
 
-    # Loop all the nodes connected to the corrent node
+    # Loop all the nodes adjacent to the corrent node
     for i in graph:
         if (i[0] == cur_node and costs[i[0]] + i[2] + i[3] < costs[i[1]]):
             unvisited.add(i[1])
-            costs[i[1]] = costs[i[0]] + i[2] + i[3] # Update path's cost to the connected node
-            path[i[1]] = path[i[0]] + ' -> ' + i[1] # Update path of the connected node
-    costs[cur_node] = 999999 
+            costs[i[1]] = costs[i[0]] + i[2] + i[3] # Update path's cost to the adjacent node
+            path[i[1]] = path[i[0]] + ' -> ' + i[1] # Update path of the adjacent node
+    
+    costs[cur_node] = 999999
     print("set(): costs - ", costs) # [DEBUG]
 
     small = min(costs, key = costs.get) # Find the key in dict():costs with the minimum value
@@ -62,14 +63,13 @@ unvisited = set()
 visited = set()
 
 start_node = input("Enter the Start Node: ")
-unvisited.add(start_node)
+goal_node = input("Enter the Goal Node: ")
 
+unvisited.add(start_node)
 path[start_node] = start_node   # Set the value with the key "start_node" to "start_node" since the path begin with the "start_node", example: {A: A} 
 costs[start_node] = 0           # Set the value with the key "start_node" to 0, example: {A: 0}  
 
 A_star(graph, costs, unvisited, visited, start_node)
-
-goal_node = input("Enter the Goal Node: ")
 
 print("Path with least cost is: ", path[goal_node])
 
