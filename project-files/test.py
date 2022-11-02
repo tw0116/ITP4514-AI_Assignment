@@ -172,10 +172,10 @@ def shortest_path(graph, curr_node, end_node, path):
 def routes(graph, curr, end, cost, path=[]):
 
     path = path + [curr]
-    print("Current path: " + str(path) + "\nCurrent cost: " + str(cost))
+    # print("Current path: " + str(path) + "\nCurrent cost: " + str(cost))
 
     if curr == end:    
-        print("***End reached***\n")
+        # print("***End reached***\n")
         fpath = str(path).replace('[', '').replace(']', '').replace("'", '').replace(', ', ' -> ')
         goal_path = dict()
         goal_path.update({fpath: cost})
@@ -186,7 +186,7 @@ def routes(graph, curr, end, cost, path=[]):
         
     paths = dict()
     for adj_node in graph[curr]:
-        print("\t--- (" + str(adj_node[1]) + " mins) --> " + adj_node[0])
+        # print("\t--- (" + str(adj_node[1]) + " mins) --> " + adj_node[0])
         if adj_node[0] not in path:
             
             newpaths = routes(graph, adj_node[0], end, cost + adj_node[1], path)
@@ -194,14 +194,14 @@ def routes(graph, curr, end, cost, path=[]):
             print("\tNew path: " + str(newpaths))
 
             for k, v in newpaths.items():
-                print("append():" + k + ": " + str(v))
+                # print("append():" + k + ": " + str(v))
                 paths.update({k: v for k, v in sorted(newpaths.items(), key = lambda item: item[1])})
                 
-    print("Return: " + str(paths))
+    # print("Return: " + str(paths))
     return paths
 
-for k, v in routes(graph, 'F', 'Q', 0, path=[]).items():
-    print(str(v) + "\t" + k)
+# for k, v in routes(graph, 'F', 'Q', 0, path=[]).items():
+#     print(str(v) + "\t" + k)
 
 
 
@@ -224,11 +224,11 @@ for k, v in routes(graph, 'F', 'Q', 0, path=[]).items():
 
 def routes2(graph, curr, end, cost, path=[]):
 
-    print()
+    station = curr.split('_', 1)[0]
+    path = path + [station]
+    print("Current path: " + str(path))
 
-    path = path + [curr]
-
-    if curr == end:    
+    if curr == end:
         fpath = str(path).replace('[', '').replace(']', '').replace("'", '').replace(', ', ' -> ')
         goal_path = dict()
         goal_path.update({fpath: cost})
@@ -243,11 +243,18 @@ def routes2(graph, curr, end, cost, path=[]):
             if node[0] == curr:
                 for adj_node in node[1]:
 
-                    if adj_node[0] not in path:
+                    station = adj_node[0].split('_', 1)[0]
+                    print("\t--- (" + str(adj_node[1]) + " mins) --> " + station)
+
+                    if station not in path:
                         newpaths = routes2(graph, adj_node[0], end, cost + adj_node[1], path)
+                        print("\tCurrent path: " + str(path))
+                        print("\tNew path: " + str(newpaths))
 
                         for k, v in newpaths.items():
+                            print("append():" + k + ": " + str(v))
                             paths.update({k: v for k, v in sorted(newpaths.items(), key = lambda item: item[1])})
+    print("Return: " + str(paths))                     
     return paths
 
 for k, v in routes2(graph2, 'F_L2', 'P_L1', 0, path=[]).items():
