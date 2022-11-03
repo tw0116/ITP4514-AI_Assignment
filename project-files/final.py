@@ -99,7 +99,7 @@ def formatRoute(route):
 
 
 
-# Unknown Algo
+# Depth First Search
 def getRoutes(graph, curr, end, cost, route=[]):
     route = route + [curr]
 
@@ -122,7 +122,7 @@ goal_node = getNodeByStation('tsim sha tsui')
 for route in getRoutes(sample_dataset, start_node, goal_node, 0, route=[]):
     print(route)
 
-# print(getRoutes(sample_dataset, start_node, goal_node, route=[]))
+print(getRoutes(sample_dataset, start_node, goal_node, route=[]))
 
 
 
@@ -143,8 +143,6 @@ def getOptimalRoutes(graph, costs, visited, unvisited, curr_station):
     if curr_station in unvisited:
         unvisited.remove(curr_station)
     visited.add(curr_station)
-    print(curr_station)
-    print(unvisited)
 
     for node in graph.items():
         station = node[0]
@@ -159,12 +157,13 @@ def getOptimalRoutes(graph, costs, visited, unvisited, curr_station):
             if (station == curr_station and costs[station] + cost < costs[adj_station]):
                 print(station, adj_station, cost)
                 unvisited.add(adj_station)
+
                 print(unvisited)
                 print(costs[station])
                 print(costs[station] + cost)
+
                 costs[adj_station] = costs[station] + cost
                 routes[adj_station] = routes[station] + '->' + adj_station
-    print()
     print()
     
     costs[curr_station] = 999999
