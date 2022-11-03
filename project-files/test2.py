@@ -39,6 +39,7 @@ def A_star(graph, costs, unvisited, visited, cur_node):
             
     costs[cur_node] = 999999
     small = min(costs, key = costs.get)
+    print(small, costs[small])
 
     if small not in visited:
         A_star(graph, costs, unvisited, visited, small)

@@ -1,3 +1,4 @@
+import json
 from pprint import PrettyPrinter, pprint
 
 sample_dataset = {
@@ -25,7 +26,7 @@ sample_dataset = {
     'nam cheong/tcl': [['lai king/tcl', 3.3], ['olympic/tcl', 3.3]],
     'olympic/tcl': [['nam cheong/tcl', 3.3], ['kowloon/tcl', 3.3]],
     'kowloon/tcl': [['olympic/tcl', 3.3], ['hong kong/tcl', 3.3]],
-    'hong kong/tcl': [['kowloon/tcl', 3.3], ['central/il', 0]],# <interchange>
+    'hong kong/tcl': [['kowloon/tcl', 3.3], ['central/il', 0]],# <interchange> 
 
     'whampoa/ktl': [['ho man tin/ktl', 4.2]],
     'ho man tin/ktl': [['whampoa/ktl', 4.2], ['yau ma tei/ktl', 2.0]],
@@ -42,48 +43,91 @@ sample_dataset = {
     'ngau tau kok/ktl': [['kowloon bay/ktl', 2.0], ['kwun tong/ktl', 2.0]],
     'kwun tong/ktl': [['ngau tau kok/ktl', 2.0], ['lam tin/ktl', 2.0]],
     'lam tin/ktl': [['kwun tong/ktl', 2.0], ['yau tong/ktl', 2.0]],
-    'yau tong/ktl': [['lam tin/ktl', 2.0], ['tiu keng leng/ktl', 2.0], ['yau tong/tkol', 0]],# <interchange>
-    'tiu keng leng/ktl': [['yau tong/ktl', 2.0], ['tiu keng leng/tkol', 0]]# <interchange>
+    'yau tong/ktl': [['lam tin/ktl', 2.0], ['tiu keng leng/ktl', 2.0], ['yau tong/tkol', 0]],# <interchange> 
+    'tiu keng leng/ktl': [['yau tong/ktl', 2.0], ['tiu keng leng/tkol', 0]],# <interchange> 
 
-    # 'kennedy town/il': [[],],
-    # 'hku/il': [[],],
-    # 'sai ying pun/il': [[],],
-    # 'sheung wan/il': [[],],
-    # 'central/il': [[],],# <interchange>
-    # 'admiralty/il': [[],],# <interchange>
-    # 'wan chai/il': [[],],
-    # 'causeway bay/il': [[],],
-    # 'tin hau/il': [[],],
-    # 'fortress hill/il': [[],],
-    # 'north point/il': [[],],# <interchange>
-    # 'quarry bay/il': [[],],# <interchange>
-    # 'tai koo/il': [[],],
-    # 'sai wan ho/il': [[],],
-    # 'shau kei wan/il': [[],],
-    # 'heng fa chuen/il': [[],],
-    # 'chai wan/il': [[],],
+    'kennedy town/il': [['hku/il', 1.9]],
+    'hku/il': [['kennedy town/il', 1.9], ['sai ying pun/il', 1.9]],
+    'sai ying pun/il': [['hku/il', 1.9], ['sheung wan/il', 1.9]],
+    'sheung wan/il': [['sai ying pun/il', 1.9], ['central/il', 1.9]],
+    'central/il': [['sheung wan/il', 1.9], ['admiralty/il', 1.9], ['central/twl', 0]],# <interchange>
+    'admiralty/il': [['central/il', 1.9], ['wan chai/il', 1.9], ['admiralty/twl', 0]],# <interchange>
+    'wan chai/il': [['admiralty/il', 1.9], ['causeway bay/il', 1.9]],
+    'causeway bay/il': [['wan chai/il', 1.9], ['tin hau/il', 1.9]],
+    'tin hau/il': [['causeway bay/il', 1.9], ['fortress hill/il', 1.9]],
+    'fortress hill/il': [['tin hau/il', 1.9], ['north point/il', 1.9]],
+    'north point/il': [['fortress hill/il', 1.9], ['quarry bay/il', 1.9], ['north point/tkol', 0]],# <interchange>
+    'quarry bay/il': [['north point/il', 1.9], ['tai koo/il', 1.9], ['quarry bay/tkol', 0]],# <interchange>
+    'tai koo/il': [['quarry bay/il', 1.9], ['sai wan ho/il', 1.9]],
+    'sai wan ho/il': [['tai koo/il', 1.9], ['shau kei wan/il', 1.9]],
+    'shau kei wan/il': [['sai wan ho/il', 1.9], ['heng fa chuen/il', 1.9]],
+    'heng fa chuen/il': [['shau kei wan/il', 1.9], ['chai wan/il', 1.9]],
+    'chai wan/il': [['heng fa chuen/il', 1.9]],
 
-    # 'po lam/tkol': [[],],
-    # 'hang hau/tkol': [[],],
-    # 'lohas park/tkol': [[],],
-    # 'tseung kwan o/tkol': [[],],
-    # 'tiu keng leng/tkol': [[],],# <interchange>
-    # 'yau tong/tkol': [[],],# <interchange>
-    # 'quarry bay/tkol': [[],],# <interchange>
-    # 'north point/tkol': [[],]# <interchange>
+    'po lam/tkol': [['hang hau/tkol', 4.2]],
+    'hang hau/tkol': [['po lam/tkol', 4.2], ['tseung kwan o/tkol', 4.2]],
+    'lohas park/tkol': [['tseung kwan o/tkol', 4.2]],
+    'tseung kwan o/tkol': [['hang hau/tkol', 4.2], ['tiu keng leng/tkol', 4.2], ['lohas park/tkol', 4.2]],
+    'tiu keng leng/tkol': [['tseung kwan o/tkol', 4.2], ['yau tong/tkol', 4.2], ['tiu keng leng/ktl', 0]],# <interchange>
+    'yau tong/tkol': [['tiu keng leng/tkol', 4.2], ['quarry bay/tkol', 4.2], ['yau tong/ktl', 0]],# <interchange>
+    'quarry bay/tkol': [['yau tong/tkol', 4.2], ['north point/tkol', 4.2], ['quarry bay/il', 0]],# <interchange>
+    'north point/tkol': [['quarry bay/tkol', 4.2], ['north point/il', 0]]# <interchange>
 }
 
 # print(getLine(sample_dataset, 'lai chi kok'))
+
+# Utilities
+def load_graph(file_name):
+    with open(file_name) as f:
+        data = json.load(f)
+        return data
 
 def getLine(graph, station):
     for node in graph:
         if station == node.split('/', 1)[0]:
             return node.split('/', 1)[1]
 
-def getRoutes():
-    return []
+def getNodeByStation(station):
+    for node in sample_dataset:
+        if station == node.split('/')[0]:
+            return node
+
+def formatRoute(route):
+    return str(route).replace('[', '').replace(']', '').replace("'", '').replace(', ', ' -> ')
 
 
+
+
+
+# Unknown Algo
+def getRoutes(graph, curr, end, cost, route=[]):
+    route = route + [curr]
+
+    if curr == end:
+        return [route]
+
+    routes = []
+    for adj_node in graph[curr]:
+        adj_station, cost = adj_node[0] , adj_node[1]
+        if adj_station not in route:
+            newRoutes = getRoutes(graph, adj_station, end, cost, route)
+
+            for newRoute in newRoutes:
+                routes.append(newRoute)
+    return routes
+
+start_node = getNodeByStation('kwai fong')
+goal_node = getNodeByStation('tsim sha tsui')
+
+for route in getRoutes(sample_dataset, start_node, goal_node, 0, route=[]):
+    print(route)
+
+# print(getRoutes(sample_dataset, start_node, goal_node, route=[]))
+
+
+
+
+# Dijkstra’s Shortest Path Algorithm
 costs = dict()
 routes = dict()
 
@@ -100,6 +144,7 @@ def getOptimalRoutes(graph, costs, visited, unvisited, curr_station):
         unvisited.remove(curr_station)
     visited.add(curr_station)
     print(curr_station)
+    print(unvisited)
 
     for node in graph.items():
         station = node[0]
@@ -109,10 +154,14 @@ def getOptimalRoutes(graph, costs, visited, unvisited, curr_station):
             adj_station = adj_node[0]
             cost = adj_node[1]
 
-            print(station, adj_station, cost)
+            # print(station, adj_station, cost)
 
             if (station == curr_station and costs[station] + cost < costs[adj_station]):
+                print(station, adj_station, cost)
                 unvisited.add(adj_station)
+                print(unvisited)
+                print(costs[station])
+                print(costs[station] + cost)
                 costs[adj_station] = costs[station] + cost
                 routes[adj_station] = routes[station] + '->' + adj_station
     print()
@@ -120,17 +169,13 @@ def getOptimalRoutes(graph, costs, visited, unvisited, curr_station):
     
     costs[curr_station] = 999999
     optimal = min(costs, key = costs.get)
+    print(optimal, costs[optimal])
 
     if optimal not in visited:
         getOptimalRoutes(graph, costs, visited, unvisited, optimal)
 
 start = 'kwai fong'
 goal = 'admiralty'
-
-def getNodeByStation(station):
-    for node in sample_dataset:
-        if station == node.split('/')[0]:
-            return node
 
 start_node = getNodeByStation(start)
 goal_node = getNodeByStation(goal)
@@ -139,11 +184,11 @@ unvisited.add(start_node)
 routes[start_node] = start_node
 costs[start_node] = 0
 
-getOptimalRoutes(sample_dataset, costs, visited, unvisited, start_node)
-print("Path with least cost is: ", routes[goal_node])
+# getOptimalRoutes(sample_dataset, costs, visited, unvisited, start_node)
+# print("Path with least cost is: ", routes[goal_node])
 
 # no need to split node
-pprint(costs)
-pprint(routes)
-pprint(visited)
-pprint(unvisited)
+# pprint(costs)
+# pprint(routes)
+# pprint(visited)
+# pprint(unvisited)
