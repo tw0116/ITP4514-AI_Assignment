@@ -190,8 +190,8 @@ def routes(graph, curr, end, cost, path=[]):
         if adj_node[0] not in path:
             
             newpaths = routes(graph, adj_node[0], end, cost + adj_node[1], path)
-            print("\tCurrent path: " + str(path))
-            print("\tNew path: " + str(newpaths))
+            # print("\tCurrent path: " + str(path))
+            # print("\tNew path: " + str(newpaths))
 
             for k, v in newpaths.items():
                 # print("append():" + k + ": " + str(v))
@@ -200,8 +200,8 @@ def routes(graph, curr, end, cost, path=[]):
     # print("Return: " + str(paths))
     return paths
 
-# for k, v in routes(graph, 'F', 'Q', 0, path=[]).items():
-#     print(str(v) + "\t" + k)
+for k, v in routes(graph, 'F', 'Q', 0, path=[]).items():
+    print(str(v) + "\t" + k)
 
 
 
