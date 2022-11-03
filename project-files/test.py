@@ -167,7 +167,8 @@ def shortest_path(graph, curr_node, end_node, path):
     print("Return: " + str(shortest))
     return shortest
 
-# print(shortest_path(graph, 'F', 'Q', path=[]))
+
+
 
 def routes(graph, curr, end, cost, path=[]):
 

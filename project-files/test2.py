@@ -29,10 +29,13 @@ def A_star(graph, costs, unvisited, visited, cur_node):
     visited.add(cur_node)
 
     for i in graph:
+        print(i[0], i[1], i[2])
+
         if (i[0] == cur_node and costs[i[0]] + i[2] + i[3] < costs[i[1]]):
             unvisited.add(i[1])
             costs[i[1]] = costs[i[0]] + i[2] + i[3]
             path[i[1]] = path[i[0]] + ' -> ' + i[1]
+    print()
             
     costs[cur_node] = 999999
     small = min(costs, key = costs.get)

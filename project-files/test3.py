@@ -46,7 +46,7 @@ graph_v2 = {
     'S-line5': [['R-line4/line5', 2.0]]
 }
 
-    
+
     
 
 def routes_v1(graph, curr, end, cost, path=[]):
@@ -85,10 +85,6 @@ pprint(routes_v1(graph_v1, 'F', 'Q', 0, path=[]))
 # for k, v in routes(graph, 'F', 'Q', 0, path=[]).items():
 #     print(str(v) + "\t" + k)
 
-
-# start = str(input("Enter Start: "))
-# end = str(input("Enter End: "))
-
 def routes_v2(graph, curr, end, cost, path=[], line=[]):
 
     for node in graph:
@@ -117,9 +113,6 @@ def routes_v2(graph, curr, end, cost, path=[], line=[]):
     return routes
 
 print(routes_v2(graph_v2, 'A', 'P', 0, path=[]))
-    
-
-
 
 # node = 'a-line1/line2/line3'
 # station, lines = node.split('-', 1)
@@ -127,11 +120,4 @@ print(routes_v2(graph_v2, 'A', 'P', 0, path=[]))
 
 # print(station)
 # print(line)
-
-route = [['red', 'green'], ['red', 'green'], ['red', 'green'], ['green', 'brown'], ['brown', 'blue'], ['blue'], ['green', 'blue'], ['blue', 'brown'], ['blue']]
-
-for i in route:
-    print(i)
-
-
 
