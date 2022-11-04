@@ -119,15 +119,16 @@ def getRoutes(graph, curr, end, cost, route=[]):
 start_node = getNodeByStation('kwai fong')
 goal_node = getNodeByStation('tsim sha tsui')
 
-for route in getRoutes(sample_dataset, start_node, goal_node, 0, route=[]):
-    print(route)
+# for route in getRoutes(sample_dataset, start_node, goal_node, 0, route=[]):
+#     print(route)
 
-print(getRoutes(sample_dataset, start_node, goal_node, route=[]))
-
-
+# print(getRoutes(sample_dataset, start_node, goal_node, route=[]))
 
 
-# Dijkstra’s Shortest Path Algorithm
+
+
+# Dijkstra’s Shortest Path Algorithm (not work)
+# A* Search (possible solution)
 costs = dict()
 routes = dict()
 
@@ -152,23 +153,34 @@ def getOptimalRoutes(graph, costs, visited, unvisited, curr_station):
             adj_station = adj_node[0]
             cost = adj_node[1]
 
-            # print(station, adj_station, cost)
+            # print(station, ' - ', adj_station, '\t', cost)
 
             if (station == curr_station and costs[station] + cost < costs[adj_station]):
-                print(station, adj_station, cost)
+                # print(station, '\t', adj_station, '\t', cost)
+
                 unvisited.add(adj_station)
 
-                print(unvisited)
-                print(costs[station])
-                print(costs[station] + cost)
+                # print(unvisited)
+                # print(costs[station])
+                # print(costs[station] + cost)
 
                 costs[adj_station] = costs[station] + cost
                 routes[adj_station] = routes[station] + '->' + adj_station
     print()
+    print()
     
     costs[curr_station] = 999999
     optimal = min(costs, key = costs.get)
-    print(optimal, costs[optimal])
+
+    for key in visited:
+        print('Visited :', key)
+
+    for key in costs.items():
+        if key[0] in unvisited:
+            print('Unvisited :', key[0], '\tCost', key[1])
+
+    # print(optimal, costs[optimal])
+    # print()
 
     if optimal not in visited:
         getOptimalRoutes(graph, costs, visited, unvisited, optimal)
@@ -183,10 +195,9 @@ unvisited.add(start_node)
 routes[start_node] = start_node
 costs[start_node] = 0
 
-# getOptimalRoutes(sample_dataset, costs, visited, unvisited, start_node)
-# print("Path with least cost is: ", routes[goal_node])
+getOptimalRoutes(sample_dataset, costs, visited, unvisited, start_node)
+print("Path with least cost is: ", routes[goal_node])
 
-# no need to split node
 # pprint(costs)
 # pprint(routes)
 # pprint(visited)
