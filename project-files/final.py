@@ -283,4 +283,6 @@ for l in interchange:
     else:
         solution = solution + '--' + l[0] + '--' + '(' + l[1] + ')'
 solution = solution + '(' + str(goal.title()) + ')'
+
+print('~' + str(weight) + ' min(s)\t' + str(len(transfer_station)) + ' Interchange\t' + str(len(route.split(' -> ')))  + ' Stops')
 print(solution)
