@@ -29,9 +29,10 @@ def A_star(graph, costs, unvisited, visited, cur_node):
     visited.add(cur_node)
 
     for i in graph:
-        print(i[0], i[1], i[2])
+        # print(i[0], i[1], i[2] , cur_node)
 
         if (i[0] == cur_node and costs[i[0]] + i[2] + i[3] < costs[i[1]]):
+            print(i[0], cur_node, i[1], i[2] )
             unvisited.add(i[1])
             costs[i[1]] = costs[i[0]] + i[2] + i[3]
             path[i[1]] = path[i[0]] + ' -> ' + i[1]
@@ -40,9 +41,9 @@ def A_star(graph, costs, unvisited, visited, cur_node):
     costs[cur_node] = 999999
     small = min(costs, key = costs.get)
 
-    # print(visited)
-    # print(unvisited)
-    # print(small, costs[small])
+    print(visited)
+    print(unvisited)
+    print(small, costs[small])
 
     if small not in visited:
         A_star(graph, costs, unvisited, visited, small)
@@ -58,17 +59,20 @@ for i in nodes:
 unvisited = set()
 visited = set()
 
-start_node = input("Enter the Start Node: ")
-goal_node = input("Enter the Goal Node: ")
+# start_node = input("Enter the Start Node: ")
+# goal_node = input("Enter the Goal Node: ")
+start_node = 'A'
+goal_node = 'H'
+
 
 unvisited.add(start_node)
 path[start_node] = start_node
 costs[start_node] = 0 
 
 A_star(graph, costs, unvisited, visited, start_node)
-
 print("Path with least cost is: ", path[goal_node])
 
+print()
 print(path)
 print(costs)
 print(unvisited)

@@ -52,10 +52,8 @@ graph_v2 = {
 def routes_v1(graph, curr, end, cost, path=[]):
 
     path = path + [curr]
-    # print("Current path: " + str(path) + "\nCurrent cost: " + str(cost))
 
     if curr == end:    
-        # print("***End reached***\n")
         fpath = str(path).replace('[', '').replace(']', '').replace("'", '').replace(', ', ' -> ')
         goal_path = dict()
         goal_path.update({fpath: cost})
@@ -66,24 +64,18 @@ def routes_v1(graph, curr, end, cost, path=[]):
         
     paths = dict()
     for adj_node in graph[curr]:
-        # print("\t--- (" + str(adj_node[1]) + " mins) --> " + adj_node[0])
-        if adj_node[0] not in path:
-            
+
+        if adj_node[0] not in path:           
             newpaths = routes_v1(graph, adj_node[0], end, cost + adj_node[1], path)
-            # print("\tCurrent path: " + str(path))
-            # print("\tNew path: " + str(newpaths))
 
             for k, v in newpaths.items():
-                # print("append():" + k + ": " + str(v))
                 paths.update({k: v for k, v in sorted(newpaths.items(), key = lambda item: item[1])})
-                
-    # print("Return: " + str(paths))
     return paths
 
-pprint(routes_v1(graph_v1, 'F', 'Q', 0, path=[]))
+# pprint(routes_v1(graph_v1, 'F', 'Q', 0, path=[]))
 
-# for k, v in routes(graph, 'F', 'Q', 0, path=[]).items():
-#     print(str(v) + "\t" + k)
+
+
 
 def routes_v2(graph, curr, end, cost, path=[], line=[]):
 
@@ -97,22 +89,25 @@ def routes_v2(graph, curr, end, cost, path=[], line=[]):
     line = line + [lines]
 
     if station == end:
-        return [path], cost, line
+        result = dict()
+        result.update({'Route': path, 'Line': line, 'Weight': cost})
+        return [result]
 
     routes = []
-    for adj_node in graph[curr_node]:
-        
+    for adj_node in graph[curr_node]:   
         adj_station = adj_node[0].split('-')[0]
         
         if adj_station not in path:
-
             new_routes = routes_v2(graph, adj_station, end, cost+adj_node[1], path, line)
 
             for route in new_routes:
                 routes.append(route)
     return routes
 
-print(routes_v2(graph_v2, 'A', 'P', 0, path=[]))
+for result in routes_v2(graph_v2, 'F', 'Q', 0, path=[]): 
+    for route, line in result.items():
+        print(route, line)
+    print()
 
 # node = 'a-line1/line2/line3'
 # station, lines = node.split('-', 1)
