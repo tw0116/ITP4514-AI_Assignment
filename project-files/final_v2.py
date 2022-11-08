@@ -233,15 +233,15 @@ if start_line != goal_line:
     defHeuristic(visited, level, levelNum=0)
     setHeuristic(sample_dataset)
 
-print()
-print(lines_heuristic)
+# print()
+# print(lines_heuristic)
  
 defHeuristic(visited, level, levelNum=0)
-print(lines_heuristic)
+# print(lines_heuristic)
 
 setHeuristic(sample_dataset)
-for item in sample_dataset:
-    print({item: sample_dataset[item]})
+# for item in sample_dataset:
+#     print({item: sample_dataset[item]})
 
 start_node = getNodeByStation(sample_dataset, start)
 goal_node = getNodeByStation(sample_dataset, goal)
