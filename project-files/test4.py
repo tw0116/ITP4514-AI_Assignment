@@ -1,7 +1,3 @@
-import json
-from pprint import PrettyPrinter, pprint
-from itertools import zip_longest
-
 sample_dataset = {
     "tsuen wan/twl": [["tai wo hau/twl", 2.0]],
     "tai wo hau/twl": [["tsuen wan/twl", 2.0], ["kwai hing/twl", 2.0]],
@@ -75,48 +71,55 @@ sample_dataset = {
     "north point/tkol": [["quarry bay/tkol", 4.2], ["north point/il", 0]]
 }
 
-graph = {
-    'A/line1': [['B/line1', 2.0]],
-    'B/line1': [['A/line1', 2.0], ['C/line1', 2.0], ['B/line3', 0]],
-    'C/line1': [['B/line1', 2.0], ['H/line1', 2.0]],
-    'H/line1': [['C/line1', 2.0], ['K/line1', 2.0],['H/line2', 0]],
-    'K/line1': [['H/line1', 2.0], ['P/line1', 3.0],['K/line2', 0]],
-    'P/line1': [['K/line1', 3.0], ['P/line3', 0], ['P/line5', 0]],
-
-    'K/line2': [['H/line2', 3.3], ['K/line1', 0]],
-    'H/line2': [['K/line2', 3.3], ['D/line2', 3.3], ['H/line1', 0]],
-    'D/line2': [['H/line2', 3.3], ['E/line2', 3.3]],
-    'E/line2': [['D/line2', 3.3], ['I/line2', 3.3]],
-    'I/line2': [['E/line2', 3.3], ['L/line2', 3.3]],
-    'L/line2': [['I/line2', 3.3], ['L/line4', 0]],
-
-    'F/line3': [['B/line3', 2.0]],
-    'B/line3': [['F/line3', 2.0], ['G/line3', 3.0], ['B/line1', 0]],
-    'G/line3': [['B/line3', 3.0], ['J/line3', 2.0]],
-    'J/line3': [['G/line3', 2.0], ['P/line3', 5.0]],
-    'P/line3': [['J/line3', 5.0], ['P/line1', 0], ['P/line5', 0]],
-
-    'R/line4': [['L/line4', 2.0], ['R/line5', 0]],
-    'L/line4': [['R/line4', 2.0], ['M/line4', 2.0],['L/line2', 0]],
-    'M/line4': [['L/line4', 2.0]],
-
-    'N/line5': [['O/line5', 2.0]],
-    'O/line5': [['N/line5', 2.0], ['P/line5', 2.0]],
-    'P/line5': [['O/line5', 2.0], ['Q/line5', 2.0], ['P/line1', 0], ['P/line3', 0]],
-    'Q/line5': [['P/line5', 2.0], ['R/line5', 2.0]],
-    'R/line5': [['Q/line5', 2.0], ['S/line5', 2.0], ['R/line4', 0]],
-    'S/line5': [['R/line5', 2.0]]
+lines = {
+    'twl': [['tcl', 0], ['ktl', 0], ['il', 0]],
+    'tcl': [['twl', 0], ['il', 0]],
+    'ktl': [['twl', 0], ['tkol', 0]],
+    'tkol': [['ktl', 0], ['il', 0]],
+    'il': [['twl', 0], ['tcl', 0], ['tkol', 0]],
 }
 
+visited = set()
+level = set()
+
+lines_heuristic = dict()
+for line in lines:
+    lines_heuristic[line] = 0
+# print(lines_heuristic)
+
+def defineHeuristic(visited, curr_level, levelNum):
+    
+    levelNum = levelNum + 1
+
+    next_level = set()
+    for line in curr_level:
+        for adj_line in lines[line]:    
+            if adj_line[0] not in visited:
+                visited.add(adj_line[0])
+                next_level.add(adj_line[0])
+                lines_heuristic[adj_line[0]] = lines_heuristic[adj_line[0]] + levelNum * 10
+    
+    if len(visited) < len(lines):
+        defineHeuristic(visited, next_level, levelNum)
+ 
+# defineHeuristic(visited, level, levelNum=0)
+# print(lines_heuristic)
+
+def setHeuristic(graph):
+    for station in graph.items():
+        adj_stations = station[1]
+
+        for adj_station in adj_stations:
+            line = adj_station[0].split('/')[1]
+            adj_station.append(lines_heuristic[line])
+
+# setHeuristic(sample_dataset)
+
+# for item in sample_dataset:
+#     print({item: sample_dataset[item]})
 
 
-# print(getLine(sample_dataset, 'lai chi kok'))
 
-# Utilities
-def load_graph(file_name):
-    with open(file_name) as f:
-        data = json.load(f)
-        return data
 
 def getLine(graph, station):
     for node in graph:
@@ -128,73 +131,20 @@ def getNodeByStation(graph, station):
         if station == node.split('/')[0]:
             return node
 
-def formatRoute(route):
-    return str(route).replace('[', '').replace(']', '').replace("'", '').replace(', ', ' -> ')
-
-def removeDuplicates(list):
-    newList = []
-    for value in list:
-        if value not in newList:
-            newList.append(value)
-    return newList
-
-
-
-
-# Depth First Search
-# def getRoutes(graph, curr, end, weight, route=[], line=[], interchange=[]):
-
-#     if route and route[-1].split('/')[0] == curr.split('/')[0]:
-#         interchange = interchange + [curr.split('/')[0]]
-#         line = line + [curr.split('/')[1]]
-#     elif not route:
-#         line = [curr.split('/')[1]]
-    
-#     route = route + [curr]     
-
-#     if curr == end:
-#         fRoute = []
-#         for station in route:
-#             fRoute.append(station.split('/')[0])
-#         result = dict()
-#         result.update({'Route': fRoute, 'Line': line, 'Interchange': interchange, 'Weight': weight})
-#         return [result]
-
-#     routes = []
-#     for adj_node in graph[curr]:
-
-#         adj_station, cost = adj_node[0] , adj_node[1]
-
-#         if adj_station not in route:
-#             newRoutes = getRoutes(graph, adj_station, end, weight+cost, route, line, interchange)
-
-#             for newRoute in newRoutes:
-#                 routes.append(newRoute)
-#     return routes
-
-# start_node = getNodeByStation(graph, 'F')
-# goal_node = getNodeByStation(graph, 'Q')
-
-# for result in getRoutes(graph, start_node, goal_node, 0, route=[], line=[], interchange=[]): 
-#     for route, line in result.items():
-#         print(route, line)
-#     print()
-
-
-
-
 # Dijkstra’s Shortest Path Algorithm
-costs = dict()
 routes = dict()
+costs = dict()
+weights = dict()
 
 for station in sample_dataset:
-    costs[station] = 999999
     routes[station] = {}
-
+    costs[station] = 999999
+    weights[station] = 0
+    
 visited = set()
 unvisited = set()
 
-def getOptimalRoutes(graph, costs, visited, unvisited, curr_station):
+def getOptimalRoutes(graph, costs, weights, visited, unvisited, curr_station):
 
     if curr_station in unvisited:
         unvisited.remove(curr_station)
@@ -207,12 +157,14 @@ def getOptimalRoutes(graph, costs, visited, unvisited, curr_station):
         for adj_node in adj_nodes:
             adj_station = adj_node[0]
             cost = adj_node[1]
+            heuristic = adj_node[2]
 
-            if (station == curr_station and adj_station not in visited and costs[station] + cost < costs[adj_station]):
+            if (station == curr_station and adj_station not in visited and costs[station] + cost + heuristic < costs[adj_station]):
 
                 unvisited.add(adj_station)
 
-                costs[adj_station] = costs[station] + cost
+                costs[adj_station] = costs[station] + cost + heuristic
+                weights[adj_station] = weights[station] + cost
                  
                 if curr_station.split('/')[1] != adj_station.split('/')[1]:
                     routes[station]['Line'] = routes[station]['Line'] + [adj_station.split('/')[1].upper()]
@@ -230,17 +182,38 @@ def getOptimalRoutes(graph, costs, visited, unvisited, curr_station):
                     ),
                     'Line': routes[station]['Line'],
                     'Transfer Station': routes[station]['Transfer Station'],
-                    'Weight': round(costs[adj_station])
+                    'Weight': round(weights[adj_station])
                 }
     
     costs[curr_station] = 999999
     optimal = min(costs, key = costs.get)
 
     if optimal not in visited:
-        getOptimalRoutes(graph, costs, visited, unvisited, optimal)
+        getOptimalRoutes(graph, costs, weights, visited, unvisited, optimal)
+
 
 start = 'lai king'
-goal = 'hang hau'
+goal = 'tseung kwan o'
+
+# --Newly added--
+start_line = getLine(sample_dataset, start)
+goal_line = getLine(sample_dataset, goal)
+
+if start_line == goal_line:
+    root_line = start_line
+    visited.add(root_line)
+    level.add(root_line)
+    
+    defineHeuristic(visited, level, levelNum=0)
+    setHeuristic(sample_dataset)
+
+if start_line != goal_line:
+    root_line = goal_line
+    visited.add(root_line)
+    level.add(root_line)
+
+    defineHeuristic(visited, level, levelNum=0)
+    setHeuristic(sample_dataset)
 
 start_node = getNodeByStation(sample_dataset, start)
 goal_node = getNodeByStation(sample_dataset, goal)
@@ -249,43 +222,5 @@ unvisited.add(start_node)
 routes[start_node] = {'Route': start_node.split('/')[0].title(), 'Line': [start_node.split('/')[1].upper()], 'Transfer Station': []}
 costs[start_node] = 0
 
-getOptimalRoutes(sample_dataset, costs, visited, unvisited, start_node)
+getOptimalRoutes(sample_dataset, costs, weights, visited, unvisited, start_node)
 print("Result:", routes[goal_node])
-
-# for result in routes[goal_node].items():
-#     if result[0] == 'Route':
-#         route = result[1]
-#         print(result[1])
-
-#     if result[0] == 'Line':
-#         line = result[1]
-#         print(result[1])
-
-#     if result[0] == 'Transfer Station':
-#         transfer_station = result[1]
-#         print(result[1]) 
-
-#     if result[0] == 'Weight':
-#         weight = result[1]
-#         print(result[1])
-
-
-# Format Sample
-# my_list = ['a-1', 'b-2', 'c-3', 'd']
-# result_3 = [item.split('-') for item in my_list]
-# result_3_flat = [item for l in result_3 for item in l]
-# print(result_3)
-# print(result_3_flat)
-
-# Final Output
-# interchange = [[x for x in t if x is not None] for t in zip_longest(line, transfer_station)]
-# solution = '(' + str(start.title()) + ')'
-# for l in interchange: 
-#     if len(l) == 1:
-#         solution = solution + '--' + l[0] + '--'
-#     else:
-#         solution = solution + '--' + l[0] + '--' + '(' + l[1] + ')'
-# solution = solution + '(' + str(goal.title()) + ')'
-
-# print('~' + str(weight) + ' min(s)\t' + str(len(transfer_station)) + ' Interchange\t' + str(len(route.split(' -> ')))  + ' Stops')
-# print(solution)
