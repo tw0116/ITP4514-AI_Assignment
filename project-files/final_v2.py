@@ -82,12 +82,15 @@ lines = {
 visited = set()
 level = set()
 
+root_line = 'il'
+visited.add(root_line)
+level.add(root_line)
+
 lines_heuristic = dict()
 for line in lines:
     lines_heuristic[line] = 0
-# print(lines_heuristic)
 
-def defineHeuristic(visited, curr_level, levelNum):
+def defHeuristic(visited, curr_level, levelNum):
     
     levelNum = levelNum + 1
 
@@ -97,13 +100,10 @@ def defineHeuristic(visited, curr_level, levelNum):
             if adj_line[0] not in visited:
                 visited.add(adj_line[0])
                 next_level.add(adj_line[0])
-                lines_heuristic[adj_line[0]] = lines_heuristic[adj_line[0]] + levelNum * 10
-    
+                lines_heuristic[adj_line[0]] = lines_heuristic[adj_line[0]] + levelNum * 5
+
     if len(visited) < len(lines):
-        defineHeuristic(visited, next_level, levelNum)
- 
-# defineHeuristic(visited, level, levelNum=0)
-# print(lines_heuristic)
+        defHeuristic(visited, next_level, levelNum)
 
 def setHeuristic(graph):
     for station in graph.items():
@@ -113,8 +113,29 @@ def setHeuristic(graph):
             line = adj_station[0].split('/')[1]
             adj_station.append(lines_heuristic[line])
 
-# setHeuristic(sample_dataset)
+def clearHeuristic(graph):
+    for station in graph.items():
+        adj_stations = station[1]
 
+        for adj_station in adj_stations:
+            adj_station.pop()
+
+# --Testing--          
+# print(lines_heuristic)
+ 
+# defHeuristic(visited, level, levelNum=0)
+# print(lines_heuristic)
+
+# setHeuristic(sample_dataset)
+# for item in sample_dataset:
+#     print({item: sample_dataset[item]})
+
+# print()
+
+# for line in lines:
+#     lines_heuristic[line] = 0
+
+# clearHeuristic(sample_dataset)
 # for item in sample_dataset:
 #     print({item: sample_dataset[item]})
 
@@ -192,8 +213,8 @@ def getOptimalRoutes(graph, costs, weights, visited, unvisited, curr_station):
         getOptimalRoutes(graph, costs, weights, visited, unvisited, optimal)
 
 
-start = 'lai king'
-goal = 'tseung kwan o'
+start = 'mei foo'
+goal = 'central'
 
 # --Newly added--
 start_line = getLine(sample_dataset, start)
@@ -203,17 +224,24 @@ if start_line == goal_line:
     root_line = start_line
     visited.add(root_line)
     level.add(root_line)
-    
-    defineHeuristic(visited, level, levelNum=0)
-    setHeuristic(sample_dataset)
 
 if start_line != goal_line:
     root_line = goal_line
     visited.add(root_line)
     level.add(root_line)
 
-    defineHeuristic(visited, level, levelNum=0)
+    defHeuristic(visited, level, levelNum=0)
     setHeuristic(sample_dataset)
+
+print()
+print(lines_heuristic)
+ 
+defHeuristic(visited, level, levelNum=0)
+print(lines_heuristic)
+
+setHeuristic(sample_dataset)
+for item in sample_dataset:
+    print({item: sample_dataset[item]})
 
 start_node = getNodeByStation(sample_dataset, start)
 goal_node = getNodeByStation(sample_dataset, goal)
