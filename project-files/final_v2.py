@@ -3,33 +3,33 @@ sample_dataset = {
     "tai wo hau/twl": [["tsuen wan/twl", 2.0], ["kwai hing/twl", 2.0]],
     "kwai hing/twl": [["tai wo hau/twl", 2.0], ["kwai fong/twl", 2.0]],
     "kwai fong/twl": [["kwai hing/twl", 2.0], ["lai king/twl", 2.0]],
-    "lai king/twl": [["kwai fong/twl", 2.0], ["mei foo/twl", 2.0], ["lai king/tcl", 0]],
+    "lai king/twl": [["kwai fong/twl", 2.0], ["mei foo/twl", 2.0], ["lai king/tcl", 0]], # Interchange
     "mei foo/twl": [["lai king/twl", 2.0], ["lai chi kok/twl", 2.0]],
     "lai chi kok/twl": [["mei foo/twl", 2.0], ["cheung sha wan/twl", 2.0]],
     "cheung sha wan/twl": [["lai chi kok/twl", 2.0], ["sham shui po/twl", 2.0]],
     "sham shui po/twl": [["cheung sha wan/twl", 2.0], ["prince edward/twl", 2.0]],
-    "prince edward/twl": [["sham shui po/twl", 2.0], ["mong kok/twl", 2.0], ["prince edward/ktl", 0]],
-    "mong kok/twl": [["prince edward/twl", 2.0], ["yau ma tei/twl", 2.0], ["mong kok/ktl", 0]],
-    "yau ma tei/twl": [["mong kok/twl", 2.0], ["jordan/twl", 2.0], ["yau ma tei/ktl", 0]],
+    "prince edward/twl": [["sham shui po/twl", 2.0], ["mong kok/twl", 2.0], ["prince edward/ktl", 0]], # Interchange
+    "mong kok/twl": [["prince edward/twl", 2.0], ["yau ma tei/twl", 2.0], ["mong kok/ktl", 0]], # Interchange
+    "yau ma tei/twl": [["mong kok/twl", 2.0], ["jordan/twl", 2.0], ["yau ma tei/ktl", 0]], # Interchange
     "jordan/twl": [["yau ma tei/twl", 2.0], ["tsim sha tsui/twl", 2.0]],
     "tsim sha tsui/twl": [["jordan/twl", 2.0], ["admiralty/twl", 2.0]],
-    "admiralty/twl": [["tsim sha tsui/twl", 2.0], ["central/twl", 2.0], ["admiralty/il", 0]],
-    "central/twl": [["admiralty/twl", 2.0], ["central/il", 0]],
+    "admiralty/twl": [["tsim sha tsui/twl", 2.0], ["central/twl", 2.0], ["admiralty/il", 0]], # Interchange
+    "central/twl": [["admiralty/twl", 2.0], ["central/il", 0]], # Interchange
 
     "tung chung/tcl": [["sunny bay/tcl", 3.3]],
     "sunny bay/tcl": [["tung chung/tcl", 3.3], ["tsing yi/tcl", 3.3]],
     "tsing yi/tcl": [["sunny bay/tcl", 3.3], ["lai king/tcl", 3.3]],
-    "lai king/tcl": [["tsing yi/tcl", 3.3], ["nam cheong/tcl", 3.3], ["lai king/twl", 0]],
+    "lai king/tcl": [["tsing yi/tcl", 3.3], ["nam cheong/tcl", 3.3], ["lai king/twl", 0]], # Interchange
     "nam cheong/tcl": [["lai king/tcl", 3.3], ["olympic/tcl", 3.3]],
     "olympic/tcl": [["nam cheong/tcl", 3.3], ["kowloon/tcl", 3.3]],
     "kowloon/tcl": [["olympic/tcl", 3.3], ["hong kong/tcl", 3.3]],
-    "hong kong/tcl": [["kowloon/tcl", 3.3], ["central/il", 0]], 
+    "hong kong/tcl": [["kowloon/tcl", 3.3], ["central/il", 0]], # Interchange
 
     "whampoa/ktl": [["ho man tin/ktl", 4.2]],
     "ho man tin/ktl": [["whampoa/ktl", 4.2], ["yau ma tei/ktl", 2.0]],
     "yau ma tei/ktl": [["ho man tin/ktl", 2.0], ["mong kok/ktl", 2.0], ["yau ma tei/twl", 0]],
     "mong kok/ktl": [["yau ma tei/ktl", 2.0], ["prince edward/ktl", 2.0], ["mong kok/twl", 0]],
-    "prince edward/ktl": [["mong kok/ktl", 2.0], ["shek kip mei/ktl", 2.0], ["prince edward/twl", 0]],
+    "prince edward/ktl": [["mong kok/ktl", 2.0], ["shek kip mei/ktl", 2.0], ["prince edward/twl", 0]], # Interchange
     "shek kip mei/ktl": [["prince edward/ktl", 2.0], ["kowloon tong/ktl", 2.0]],
     "kowloon tong/ktl": [["shek kip mei/ktl", 2.0], ["lok fu/ktl", 2.0]],
     "lok fu/ktl": [["kowloon tong/ktl", 2.0], ["wong tai sin/ktl", 2.0]],
@@ -40,21 +40,21 @@ sample_dataset = {
     "ngau tau kok/ktl": [["kowloon bay/ktl", 2.0], ["kwun tong/ktl", 2.0]],
     "kwun tong/ktl": [["ngau tau kok/ktl", 2.0], ["lam tin/ktl", 2.0]],
     "lam tin/ktl": [["kwun tong/ktl", 2.0], ["yau tong/ktl", 2.0]],
-    "yau tong/ktl": [["lam tin/ktl", 2.0], ["tiu keng leng/ktl", 2.0], ["yau tong/tkol", 0]], 
-    "tiu keng leng/ktl": [["yau tong/ktl", 2.0], ["tiu keng leng/tkol", 0]], 
+    "yau tong/ktl": [["lam tin/ktl", 2.0], ["tiu keng leng/ktl", 2.0], ["yau tong/tkol", 0]], # Interchange
+    "tiu keng leng/ktl": [["yau tong/ktl", 2.0], ["tiu keng leng/tkol", 0]], # Interchange
 
     "kennedy town/il": [["hku/il", 1.9]],
     "hku/il": [["kennedy town/il", 1.9], ["sai ying pun/il", 1.9]],
     "sai ying pun/il": [["hku/il", 1.9], ["sheung wan/il", 1.9]],
     "sheung wan/il": [["sai ying pun/il", 1.9], ["central/il", 1.9]],
-    "central/il": [["sheung wan/il", 1.9], ["admiralty/il", 1.9], ["central/twl", 0]],
-    "admiralty/il": [["central/il", 1.9], ["wan chai/il", 1.9], ["admiralty/twl", 0]],
+    "central/il": [["sheung wan/il", 1.9], ["admiralty/il", 1.9], ["central/twl", 0]], # Interchange
+    "admiralty/il": [["central/il", 1.9], ["wan chai/il", 1.9], ["admiralty/twl", 0]], # Interchange
     "wan chai/il": [["admiralty/il", 1.9], ["causeway bay/il", 1.9]],
     "causeway bay/il": [["wan chai/il", 1.9], ["tin hau/il", 1.9]],
     "tin hau/il": [["causeway bay/il", 1.9], ["fortress hill/il", 1.9]],
     "fortress hill/il": [["tin hau/il", 1.9], ["north point/il", 1.9]],
-    "north point/il": [["fortress hill/il", 1.9], ["quarry bay/il", 1.9], ["north point/tkol", 0]],
-    "quarry bay/il": [["north point/il", 1.9], ["tai koo/il", 1.9], ["quarry bay/tkol", 0]],
+    "north point/il": [["fortress hill/il", 1.9], ["quarry bay/il", 1.9], ["north point/tkol", 0]], # Interchange
+    "quarry bay/il": [["north point/il", 1.9], ["tai koo/il", 1.9], ["quarry bay/tkol", 0]], # Interchange
     "tai koo/il": [["quarry bay/il", 1.9], ["sai wan ho/il", 1.9]],
     "sai wan ho/il": [["tai koo/il", 1.9], ["shau kei wan/il", 1.9]],
     "shau kei wan/il": [["sai wan ho/il", 1.9], ["heng fa chuen/il", 1.9]],
@@ -65,10 +65,10 @@ sample_dataset = {
     "hang hau/tkol": [["po lam/tkol", 4.2], ["tseung kwan o/tkol", 4.2]],
     "lohas park/tkol": [["tseung kwan o/tkol", 4.2]],
     "tseung kwan o/tkol": [["hang hau/tkol", 4.2], ["tiu keng leng/tkol", 4.2], ["lohas park/tkol", 4.2]],
-    "tiu keng leng/tkol": [["tseung kwan o/tkol", 4.2], ["yau tong/tkol", 4.2], ["tiu keng leng/ktl", 0]],
-    "yau tong/tkol": [["tiu keng leng/tkol", 4.2], ["quarry bay/tkol", 4.2], ["yau tong/ktl", 0]],
-    "quarry bay/tkol": [["yau tong/tkol", 4.2], ["north point/tkol", 4.2], ["quarry bay/il", 0]],
-    "north point/tkol": [["quarry bay/tkol", 4.2], ["north point/il", 0]]
+    "tiu keng leng/tkol": [["tseung kwan o/tkol", 4.2], ["yau tong/tkol", 4.2], ["tiu keng leng/ktl", 0]], # Interchange
+    "yau tong/tkol": [["tiu keng leng/tkol", 4.2], ["quarry bay/tkol", 4.2], ["yau tong/ktl", 0]], # Interchange
+    "quarry bay/tkol": [["yau tong/tkol", 4.2], ["north point/tkol", 4.2], ["quarry bay/il", 0]], # Interchange
+    "north point/tkol": [["quarry bay/tkol", 4.2], ["north point/il", 0]] # Interchange
 }
 
 lines = {
@@ -100,7 +100,7 @@ def defHeuristic(visited, curr_level, levelNum):
             if adj_line[0] not in visited:
                 visited.add(adj_line[0])
                 next_level.add(adj_line[0])
-                lines_heuristic[adj_line[0]] = lines_heuristic[adj_line[0]] + levelNum * 5
+                lines_heuristic[adj_line[0]] = lines_heuristic[adj_line[0]] + levelNum * 0
 
     if len(visited) < len(lines):
         defHeuristic(visited, next_level, levelNum)
@@ -114,6 +114,9 @@ def setHeuristic(graph):
             adj_station.append(lines_heuristic[line])
 
 def clearHeuristic(graph):
+    for item in graph:
+        print({item: graph[item]})
+
     for station in graph.items():
         adj_stations = station[1]
 
@@ -213,8 +216,8 @@ def getOptimalRoutes(graph, costs, weights, visited, unvisited, curr_station):
         getOptimalRoutes(graph, costs, weights, visited, unvisited, optimal)
 
 
-start = 'mei foo'
-goal = 'central'
+start = 'tiu keng leng'
+goal = 'kowloon'
 
 # --Newly added--
 start_line = getLine(sample_dataset, start)
@@ -233,6 +236,7 @@ if start_line != goal_line:
     defHeuristic(visited, level, levelNum=0)
     setHeuristic(sample_dataset)
 
+
 # print()
 # print(lines_heuristic)
  
@@ -243,6 +247,8 @@ setHeuristic(sample_dataset)
 # for item in sample_dataset:
 #     print({item: sample_dataset[item]})
 
+
+print()
 start_node = getNodeByStation(sample_dataset, start)
 goal_node = getNodeByStation(sample_dataset, goal)
 
@@ -252,3 +258,10 @@ costs[start_node] = 0
 
 getOptimalRoutes(sample_dataset, costs, weights, visited, unvisited, start_node)
 print("Result:", routes[goal_node])
+
+
+print()
+for line in lines:
+    lines_heuristic[line] = 0
+
+clearHeuristic(sample_dataset)
