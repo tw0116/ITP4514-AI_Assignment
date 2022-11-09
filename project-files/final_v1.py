@@ -239,7 +239,7 @@ def getOptimalRoutes(graph, costs, visited, unvisited, curr_station):
     if optimal not in visited:
         getOptimalRoutes(graph, costs, visited, unvisited, optimal)
 
-start = 'lai king'
+start = 'mei foo'
 goal = 'central'
 
 start_node = getNodeByStation(sample_dataset, start)

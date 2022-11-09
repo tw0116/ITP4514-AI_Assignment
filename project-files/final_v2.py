@@ -100,7 +100,7 @@ def defHeuristic(visited, curr_level, levelNum):
             if adj_line[0] not in visited:
                 visited.add(adj_line[0])
                 next_level.add(adj_line[0])
-                lines_heuristic[adj_line[0]] = lines_heuristic[adj_line[0]] + levelNum * 0
+                lines_heuristic[adj_line[0]] = lines_heuristic[adj_line[0]] + levelNum * 5
 
     if len(visited) < len(lines):
         defHeuristic(visited, next_level, levelNum)
@@ -259,9 +259,9 @@ costs[start_node] = 0
 getOptimalRoutes(sample_dataset, costs, weights, visited, unvisited, start_node)
 print("Result:", routes[goal_node])
 
+clearHeuristic(sample_dataset)
 
 print()
 for line in lines:
     lines_heuristic[line] = 0
 
-clearHeuristic(sample_dataset)
