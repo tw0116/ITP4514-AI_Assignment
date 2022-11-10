@@ -239,8 +239,11 @@ def getOptimalRoutes(graph, costs, visited, unvisited, curr_station):
     if optimal not in visited:
         getOptimalRoutes(graph, costs, visited, unvisited, optimal)
 
-start = 'mei foo'
-goal = 'central'
+# start = 'tiu keng leng'
+# goal = 'kowloon'
+
+start = 'kowloon'
+goal = 'tiu keng leng'
 
 start_node = getNodeByStation(sample_dataset, start)
 goal_node = getNodeByStation(sample_dataset, goal)
@@ -251,7 +254,6 @@ costs[start_node] = 0
 
 getOptimalRoutes(sample_dataset, costs, visited, unvisited, start_node)
 print("Result:", routes[goal_node])
-
 
 for result in routes[goal_node].items():
     if result[0] == 'Route':
@@ -279,14 +281,14 @@ for result in routes[goal_node].items():
 # print(result_3_flat)
 
 # Final Output
-interchange = [[x for x in t if x is not None] for t in zip_longest(line, transfer_station)]
-solution = '(' + str(start.title()) + ')'
-for l in interchange: 
-    if len(l) == 1:
-        solution = solution + '--' + l[0] + '--'
-    else:
-        solution = solution + '--' + l[0] + '--' + '(' + l[1] + ')'
-solution = solution + '(' + str(goal.title()) + ')'
+# interchange = [[x for x in t if x is not None] for t in zip_longest(line, transfer_station)]
+# solution = '(' + str(start.title()) + ')'
+# for l in interchange: 
+#     if len(l) == 1:
+#         solution = solution + '--' + l[0] + '--'
+#     else:
+#         solution = solution + '--' + l[0] + '--' + '(' + l[1] + ')'
+# solution = solution + '(' + str(goal.title()) + ')'
 
-print('~' + str(weight) + ' min(s)\t' + str(len(transfer_station)) + ' Interchange\t' + str(len(route.split(' -> ')))  + ' Stops')
-print(solution)
+# print('~' + str(weight) + ' min(s)\t' + str(len(transfer_station)) + ' Interchange\t' + str(len(route.split(' -> ')))  + ' Stops')
+# print(solution)

@@ -80,60 +80,84 @@ lines = {
 }
 
 visited_line = set()
-level = set()
+curr_line = set()
 
 lines_heuristic = dict()
 for line in lines:
     lines_heuristic[line] = 0
 
-def defHeuristic(visited, curr_level, levelNum):
+print(lines_heuristic)
+
+
+
+
+
+
+
+
+
+
+
+visited_station = set()
+curr_station = set()
+
+stations_heuristic = dict()
+for station in sample_dataset:
+    stations_heuristic[station] = 0
+    
+for station, heuristic in stations_heuristic.items():
+    print({station : heuristic})
+
+
+
+
+# root_line = 'twl'
+# visited_line.add(root_line)
+# curr_line.add(root_line)
+
+# root_station = 'mei foo/twl'
+# visited_station.add(root_station)
+# curr_station.add(root_station)
+
+def defHeuristic(dataset, heuristic_set, visited, curr_level, levelNum, heuristic):
     
     levelNum = levelNum + 1
 
     next_level = set()
-    for line in curr_level:
-        for adj_line in lines[line]:    
-            if adj_line[0] not in visited:
-                visited.add(adj_line[0])
-                next_level.add(adj_line[0])
-                lines_heuristic[adj_line[0]] = lines_heuristic[adj_line[0]] + levelNum * 5
+    for node in curr_level:
+        for adj_node in dataset[node]:
+            if adj_node[0] not in visited:
+                visited.add(adj_node[0])
+                next_level.add(adj_node[0])
+                heuristic_set[adj_node[0]] = heuristic_set[adj_node[0]] + levelNum * heuristic
 
-    if len(visited) < len(lines):
-        defHeuristic(visited, next_level, levelNum)
+    if len(visited) < len(dataset):
+        defHeuristic(dataset, heuristic_set, visited, next_level, levelNum, heuristic)
 
-def setHeuristic(graph):
-    for station in graph.items():
-        adj_stations = station[1]
-
-        for adj_station in adj_stations:
-            line = adj_station[0].split('/')[1]
-            adj_station.append(lines_heuristic[line])
-
-def clearHeuristic(graph):
-    for station in graph.items():
-        adj_stations = station[1]
-
-        for adj_station in adj_stations:
-            adj_station.pop()
-
-# --Testing--          
-# print(lines_heuristic)
- 
-# defHeuristic(visited, level, levelNum=0)
-# print(lines_heuristic)
-
-# setHeuristic(sample_dataset)
-# for item in sample_dataset:
-#     print({item: sample_dataset[item]})
+# defHeuristic(lines, lines_heuristic, visited_line, curr_line, 0, 5)
+# defHeuristic(sample_dataset, stations_heuristic, visited_station, curr_station, 0, 1)
 
 # print()
+# print(lines_heuristic)
+# for station, heuristic in stations_heuristic.items():
+#     print({station : heuristic})
 
-# for line in lines:
-#     lines_heuristic[line] = 0
 
-# clearHeuristic(sample_dataset)
-# for item in sample_dataset:
-#     print({item: sample_dataset[item]})
+
+
+
+def setHeuristic(dataset):
+    for station in dataset.items():
+        adj_stations = station[1]
+        for adj_station in adj_stations:
+            line = adj_station[0].split('/')[1]
+            adj_station.append(lines_heuristic[line] + stations_heuristic[adj_station[0]])
+
+# setHeuristic(sample_dataset)
+
+# print()
+# for station, adj_nodes in sample_dataset.items():
+#     print({station: adj_nodes})
 
 
 
@@ -148,7 +172,9 @@ def getNodeByStation(graph, station):
         if station == node.split('/')[0]:
             return node
 
-# Dijkstra’s Shortest Path Algorithm
+
+
+
 routes = dict()
 costs = dict()
 weights = dict()
@@ -201,7 +227,7 @@ def getOptimalRoutes(graph, costs, weights, visited, unvisited, curr_station):
                     'Transfer Station': routes[station]['Transfer Station'],
                     'Weight': round(weights[adj_station])
                 }
-
+    
     costs[curr_station] = 999999
     optimal = min(costs, key = costs.get)
 
@@ -209,55 +235,57 @@ def getOptimalRoutes(graph, costs, weights, visited, unvisited, curr_station):
         getOptimalRoutes(graph, costs, weights, visited, unvisited, optimal)
 
 
-# start = 'tiu keng leng'
-# goal = 'kowloon'
 
-start = 'kowloon'
-goal = 'tiu keng leng'
+start = 'prince edward'
+goal = 'north point'
 
-# start = 'mei foo'
-# goal = 'central'
-
-# [DEBUG]
-print(lines_heuristic)
-# for item in sample_dataset:
-#     print({item: sample_dataset[item]})
-
-# --Newly added--
 start_line = getLine(sample_dataset, start)
 goal_line = getLine(sample_dataset, goal)
 
 if start_line == goal_line:
     root_line = start_line
     visited_line.add(root_line)
-    level.add(root_line)
+    curr_line.add(root_line)
 
 if start_line != goal_line:
     root_line = goal_line
     visited_line.add(root_line)
-    level.add(root_line)
+    curr_line.add(root_line)
 
-defHeuristic(visited_line, level, 0)
-setHeuristic(sample_dataset)
+defHeuristic(lines, lines_heuristic, visited_line, curr_line, 0, 5)
 
-# [DEBUG]
-print(lines_heuristic) 
-# for item in sample_dataset:
-#     print({item: sample_dataset[item]})
+root_station = getNodeByStation(sample_dataset, start)
+visited_station.add(root_station)
+curr_station.add(root_station)
 
+defHeuristic(sample_dataset, stations_heuristic, visited_station, curr_station, 0, 1)
 
 print()
-# start_node = getNodeByStation(sample_dataset, start)
-# goal_node = getNodeByStation(sample_dataset, goal)
+print(lines_heuristic)
+for station, heuristic in stations_heuristic.items():
+    print({station : heuristic})
+
+setHeuristic(sample_dataset)
+
+print()
+for station, adj_nodes in sample_dataset.items():
+    print({station: adj_nodes})
+
+start_node = getNodeByStation(sample_dataset, start)
+goal_node = getNodeByStation(sample_dataset, goal)
 
 # start_node = 'tiu keng leng/tkol'
 # goal_node = 'kowloon/tcl'
 
-start_node = 'kowloon/tcl'
-goal_node = 'tiu keng leng/tkol'
+# start_node = 'kowloon/tcl'
+# goal_node = 'tiu keng leng/tkol'
 
 # start_node = 'mei foo/twl'
 # goal_node = 'central/il'
+
+
+
+
 
 unvisited.add(start_node)
 routes[start_node] = {'Route': start_node.split('/')[0].title(), 'Line': [start_node.split('/')[1].upper()], 'Transfer Station': []}
