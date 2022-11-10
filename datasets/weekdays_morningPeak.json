@@ -14,7 +14,7 @@
     "jordan/twl": [["yau ma tei/twl", 2.0], ["tsim sha tsui/twl", 2.0]],
     "tsim sha tsui/twl": [["jordan/twl", 2.0], ["admiralty/twl", 2.0]],
     "admiralty/twl": [["tsim sha tsui/twl", 2.0], ["central/twl", 2.0], ["admiralty/il", 0]],
-    "central/twl": [["admiralty/twl", 2.0], ["central/il", 0]],
+    "central/twl": [["admiralty/twl", 2.0], ["hong kong/tcl", 0], ["central/il", 0]],
 
     "tung chung/tcl": [["sunny bay/tcl", 3.3]],
     "sunny bay/tcl": [["tung chung/tcl", 3.3], ["tsing yi/tcl", 3.3]],
@@ -23,7 +23,7 @@
     "nam cheong/tcl": [["lai king/tcl", 3.3], ["olympic/tcl", 3.3]],
     "olympic/tcl": [["nam cheong/tcl", 3.3], ["kowloon/tcl", 3.3]],
     "kowloon/tcl": [["olympic/tcl", 3.3], ["hong kong/tcl", 3.3]],
-    "hong kong/tcl": [["kowloon/tcl", 3.3], ["central/il", 0]], 
+    "hong kong/tcl": [["kowloon/tcl", 3.3], ["central/twl", 0], ["central/il", 0]], 
 
     "whampoa/ktl": [["ho man tin/ktl", 4.2]],
     "ho man tin/ktl": [["whampoa/ktl", 4.2], ["yau ma tei/ktl", 2.0]],
@@ -47,7 +47,7 @@
     "hku/il": [["kennedy town/il", 1.9], ["sai ying pun/il", 1.9]],
     "sai ying pun/il": [["hku/il", 1.9], ["sheung wan/il", 1.9]],
     "sheung wan/il": [["sai ying pun/il", 1.9], ["central/il", 1.9]],
-    "central/il": [["sheung wan/il", 1.9], ["admiralty/il", 1.9], ["central/twl", 0]],
+    "central/il": [["sheung wan/il", 1.9], ["admiralty/il", 1.9], ["hong kong/tcl", 0], ["central/twl", 0]],
     "admiralty/il": [["central/il", 1.9], ["wan chai/il", 1.9], ["admiralty/twl", 0]],
     "wan chai/il": [["admiralty/il", 1.9], ["causeway bay/il", 1.9]],
     "causeway bay/il": [["wan chai/il", 1.9], ["tin hau/il", 1.9]],
