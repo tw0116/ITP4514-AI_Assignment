@@ -151,7 +151,7 @@ def setHeuristic(dataset):
         adj_stations = station[1]
         for adj_station in adj_stations:
             line = adj_station[0].split('/')[1]
-            adj_station.append(lines_heuristic[line] + stations_heuristic[adj_station[0]])
+            adj_station.append(lines_heuristic[line] * stations_heuristic[adj_station[0]])
 
 # setHeuristic(sample_dataset)
 
@@ -236,8 +236,8 @@ def getOptimalRoutes(graph, costs, weights, visited, unvisited, curr_station):
 
 
 
-start = 'prince edward'
-goal = 'north point'
+start = 'mei foo'
+goal = 'central'
 
 start_line = getLine(sample_dataset, start)
 goal_line = getLine(sample_dataset, goal)
@@ -254,7 +254,7 @@ if start_line != goal_line:
 
 defHeuristic(lines, lines_heuristic, visited_line, curr_line, 0, 5)
 
-root_station = getNodeByStation(sample_dataset, start)
+root_station = getNodeByStation(sample_dataset, goal)
 visited_station.add(root_station)
 curr_station.add(root_station)
 

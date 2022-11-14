@@ -212,7 +212,7 @@ def getOptimalRoutes(graph, costs, weights, visited, unvisited, curr_station):
 # start = 'tiu keng leng'
 # goal = 'kowloon'
 
-start = 'kowloon'
+start = 'hong kong'
 goal = 'tiu keng leng'
 
 # start = 'mei foo'
@@ -242,8 +242,8 @@ setHeuristic(sample_dataset)
 
 # [DEBUG]
 print(lines_heuristic) 
-# for item in sample_dataset:
-#     print({item: sample_dataset[item]})
+for item in sample_dataset:
+    print({item: sample_dataset[item]})
 
 
 print()
